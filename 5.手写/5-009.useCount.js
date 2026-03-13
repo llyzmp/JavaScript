@@ -9,12 +9,26 @@ export function useCount() {
     }, 1000);
   }
   onMounted(() =>{
-    onMounted
+    startCount()
   })
   onMounted(() =>{
     if(timer) {
       clearInterval(timer)
     }
   })
+  return {count}
+}
+
+
+
+import { useState, useEffect } from 'react'
+export function useTimer() {
+  const [count, setCount] = useState(0)
+  useEffect(() =>{
+    const timer = setInterval(() => {
+      setCount((pre) => pre + 1)
+    }, 1000);
+    return () => clearInterval(timer)
+  },[])
   return {count}
 }
